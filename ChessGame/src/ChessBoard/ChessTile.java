@@ -1,5 +1,6 @@
 package ChessBoard;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,14 +20,16 @@ public abstract class ChessTile {
 		{
 			emptyChessTileMap.put(i, new EmptyChessTile(i));
 		}
-		
+		Collections.unmodifiableMap(emptyChessTileMap);
 		return emptyChessTileMap;
 	}
+	
 	
 	public static ChessTile createChessTile(final int tile_ID, final ChessPiece piece)
 	{
 		return piece != null ? new OccupiedChessTile(tile_ID, piece) : EMPTY_CHESS_TILES.get(tile_ID);
 	}
+	
 	
 	private ChessTile(int tile_ID)
 	{
@@ -39,7 +42,7 @@ public abstract class ChessTile {
 	
 	public static final class EmptyChessTile extends ChessTile
 	{
-		EmptyChessTile(final int emptyTile_ID)
+		private EmptyChessTile(final int emptyTile_ID)
 		{
 			super(emptyTile_ID);
 		}
@@ -63,7 +66,7 @@ public abstract class ChessTile {
 	{
 		private final ChessPiece PieceOnTile;
 		
-		OccupiedChessTile(final int occupiedTile_ID, ChessPiece PieceOnTile)
+		private OccupiedChessTile(final int occupiedTile_ID, ChessPiece PieceOnTile)
 		{
 			super(occupiedTile_ID);
 			this.PieceOnTile = PieceOnTile;
