@@ -1,8 +1,10 @@
 package ChessPiece;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import ChessBoard.BoardUtility;
 import ChessBoard.ChessTile;
 import ChessUtility.Alliance;
 
@@ -17,29 +19,47 @@ public class Knight extends ChessPiece {
 
 	@Override
 	public List<Move> calculateLegalMoves(Board board) {
-		return null;
 	
 	int possibleDestinationID;
 	final List<Move> legalMoves = new ArrayList<>();
 	
 	
-	for(final int currentCoordinate : POSSIBLE_MOVE_COORDINATES)
+	for(final int currentCoordinateOffset : POSSIBLE_MOVE_COORDINATES)
 	{
-		possibleDestinationID = this.tile_ID + currentCoordinate;
+		possibleDestinationID = this.tile_ID + currentCoordinateOffset;
 		
-		if(true /*ValidCoordinate*/)
+		if(BoardUtility.isValidTileID(possibleDestinationID))
 		{
-			final ChessTile possibleDestinationID = board.getTile(possibleDestinationID);
-			if(!possibleDestinationID.isOccupied())
+			if(isFirstColummExclusion(this.tile_ID, currentCoordinateOffset))
+			{
+				continue;
+			}
+			
+			final ChessTile possibleDestinationTile = board.getTile(possibleDestinationID);
+			if(!possibleDestinationTile.isOccupied())
 			{
 				legalMoves.add(new Move());
 			}
 			else 
 			{
-				final ChessPiece pieceAtDestination = possibleDestinationID.getPiece();
+				final ChessPiece pieceAtDestination = possibleDestinationTile.getPiece();
 				final Alliance pieceColour = pieceAtDestination.getColour();
+				
+				if(this.pieceColour != pieceColour)
+				{
+					legalMoves.add(new Move());
+				}
 			}
 		}
+		
+	}
+	Collections.unmodifiableList(legalMoves);
+	return legalMoves;
+}
+	private static boolean isFirstColummExclusion(final int currentTile_ID, final int candidateOffset)
+	{
+		return BoardUtility.FIRST_COLUMM[currentTile_ID] && ((candidateOffset == -17 || candidateOffset == -10 ||
+				candidateOffset == 6 || candidateOffset == 15));
 	}
 }
 
