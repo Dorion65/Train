@@ -2,6 +2,8 @@ package ChessPiece;
 
 import java.util.List;
 
+import ChessBoard.Board;
+import ChessBoard.Move;
 import ChessUtility.Alliance;
 
 public abstract class ChessPiece {
