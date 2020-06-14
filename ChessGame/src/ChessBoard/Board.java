@@ -2,7 +2,7 @@ package ChessBoard;
 
 public class Board {
 
-	public ChessTile getTile(final int possibleDestinationID) {
+	public static ChessTile getTile(int candidateDestinationCoordinate) {
 		
 		return null;
 	}

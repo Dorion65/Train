@@ -10,13 +10,13 @@ import ChessBoard.ChessTile;
 import ChessBoard.Move;
 import ChessUtility.Alliance;
 
-public class Bishop extends ChessPiece {
-	
-	private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-9,-7,7,9};
+public class Rook extends ChessPiece{
 
 	
-	//Läufer
-	Bishop(int tile_ID, Alliance pieceColour) {
+	private final static int[] CANDIDATE_MOVE_VECTOR_COORDINATES = {-8,-1,1,8};
+	
+	//Turm
+	Rook(int tile_ID, Alliance pieceColour) {
 		super(tile_ID, pieceColour);
 	}
 
@@ -68,14 +68,12 @@ public class Bishop extends ChessPiece {
 	
 	private static boolean isFirstColumnExclusion(final int currentPosition, final int candidateOffset)
 	{
-		return BoardUtility.FIRST_COLUMN[currentPosition] && (candidateOffset == -9 || candidateOffset == 7);
+		return BoardUtility.FIRST_COLUMN[currentPosition] && (candidateOffset == -1);
 	}
 	
 	private static boolean isEigthColumnExclusion(final int currentPosition, final int candidateOffset)
 	{
-		return BoardUtility.FIRST_COLUMN[currentPosition] && (candidateOffset == 9 || candidateOffset == -7);
+		return BoardUtility.FIRST_COLUMN[currentPosition] && (candidateOffset == 1);
 	}
 
 }
-
-

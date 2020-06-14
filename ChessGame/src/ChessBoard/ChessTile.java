@@ -3,7 +3,6 @@ package ChessBoard;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import ChessPiece.ChessPiece;
 
 public abstract class ChessTile {
